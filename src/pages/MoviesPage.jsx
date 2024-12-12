@@ -3,23 +3,23 @@ import Banner from "../components/Banner";
 import MovieCard from "../components/MovieCard"
 
 const base_movie_api_url = 'http://localhost:3001/api/movies'
-const [movies, setMovies] = useState([])
 
-useEffect(() => {
-    fetch(base_movie_api_url)
-        .then(res => res.json())
-        .then(data => {
-            console.log(data);
-
-            setMovies(data.movies)
-            console.log(movies);
-
-
-        }).catch(err => console.error(err))
-}, [])
 
 export default function MoviesPaga() {
+    const [movies, setMovies] = useState([])
 
+    useEffect(() => {
+        fetch(base_movie_api_url)
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+
+                setMovies(data.movies)
+                console.log(movies);
+
+
+            }).catch(err => console.error(err))
+    }, [])
 
     return (
         <>
