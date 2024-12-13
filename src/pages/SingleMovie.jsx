@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom"
 import Banner from "../components/Banner";
 import ReviewCard from "../components/ReviewCard"
+import ReviewForm from "../components/ReviewForm";
 
 export default function SingleMovie() {
 
@@ -11,6 +12,8 @@ export default function SingleMovie() {
     const [movie, setMovie] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
+
     useEffect(() => {
 
         // make a fetch request to the base api endpoint
@@ -30,7 +33,7 @@ export default function SingleMovie() {
                 setError(err.message);   // Set error state if something goes wrong
                 setLoading(false);   // Set loading to false in case of an error
             });
-    }, []);
+    }, [success]);
 
     // If the movie is still loading, show a loading message
     if (loading) {
@@ -44,6 +47,9 @@ export default function SingleMovie() {
     return (
         <>
             <Banner title={movie?.title} subtitle={`By ${movie?.director}`} leadtext={movie?.abstract} genre={movie?.genre} />
+
+
+            <ReviewForm movie_id={id} />
 
             <section className="reviews">
                 <div className="container">
