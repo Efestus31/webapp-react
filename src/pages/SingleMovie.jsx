@@ -49,7 +49,7 @@ export default function SingleMovie() {
             <Banner title={movie?.title} subtitle={`By ${movie?.director}`} leadtext={movie?.abstract} genre={movie?.genre} />
 
 
-            <ReviewForm movie_id={id} />
+            <ReviewForm movie_id={id} success={success} handleSuccess={setSuccess} />
 
             <section className="reviews">
                 <div className="container">

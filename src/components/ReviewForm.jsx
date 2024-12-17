@@ -1,11 +1,11 @@
 import { useState } from "react";
 
-export default function ReviewForm({ movie_id }) {
+export default function ReviewForm({ movie_id, success, handleSuccess }) {
     const [name, setName] = useState('');
     const [textReview, setTextReview] = useState('');
     const [rating, setRating] = useState(0);
     const [error, setError] = useState(null);
-    const [success, setSuccess] = useState(null);
+    //const [success, setSuccess] = useState(null);
 
     function HandleToggleForm() {
         document.getElementById('form-card').classList.toggle('d-none');
@@ -39,20 +39,19 @@ export default function ReviewForm({ movie_id }) {
                     console.log(data);
 
                     if (data.success) {
-                        setSuccess('Thanks for the review');
+                        handleSuccess('Thanks for the review');
+
+                        // Reset the fields
+                        setName('');
+                        setTextReview('');
+                        setRating(0);
 
                         setTimeout(HandleToggleForm, 1000);
 
-                        setTimeout(() => setSuccess(null), 2000);
+                        setTimeout(() => handleSuccess(null), 2000);
                     }
                 })
                 .catch((err) => console.log(err))
-                .finally(() => {
-                    // Reset the fields
-                    setName('');
-                    setTextReview('');
-                    setRating(0);
-                });
         }
     }
 
